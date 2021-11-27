@@ -9,8 +9,10 @@ use App\Http\Requests\PostRequest;
 class PostController extends Controller
 {
    public function index(Post $post)
+                        //PostClassの定義
    {
     return view('posts/index')->with(['posts' => $post->getPaginateByLimit()]);  
+                                     //viewの$posts変数  //pagenation->PostClassだからPost.php
    }
    public function show(Post $post)
    {
@@ -21,6 +23,7 @@ class PostController extends Controller
     return view('posts/create');
    }
    public function store(PostRequest $request, Post $post)
+                         //これでpostのデータを受け取る
    {
     $input = $request['post'];
     $post->fill($input)->save();
