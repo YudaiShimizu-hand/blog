@@ -18,6 +18,7 @@
             @method('DELETE')
             <button type="submit"><span onclick="return deletePost(this);">delete</span></button>
         </form> 
+        <small>{{ $post->user->name }}</small>
         <h2 class="title">
             {{ $post->title }}
         </h2>
