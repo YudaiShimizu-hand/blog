@@ -13,7 +13,19 @@ class PostController extends Controller
    public function index(Post $post)
                         //PostClassの定義
    {
-    return view('posts/index')->with(['posts' => $post->getPaginateByLimit()]);  
+    $client = new \GuzzleHttp\Client();
+    $url = 'https://teratail.com/api/v1/questions';
+    $response = $client->request(
+      'GET',
+       $url,
+      ['Bearer' => config('services.teratail.token')]
+     );
+     $questions = json_decode($response->getBody(), true);
+     return view('posts/index')->with([
+            'posts' => $post->getPaginateByLimit(),
+            'questions' => $questions['questions'],
+        ]);
+    //return view('posts/index')->with(['posts' => $post->getPaginateByLimit()]);  
                                      //viewの$posts変数  //pagenation->PostClassだからPost.php
    }
    public function show(Post $post)

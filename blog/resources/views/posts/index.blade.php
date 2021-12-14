@@ -22,6 +22,13 @@
                     <p class='body'>{{ $post->body }}</p>
                 </div>
             @endforeach
+             <div>
+                @foreach($questions as $question)
+                    <a href="https://teratail.com/questions/{{ $question['id'] }}">
+                    <div>{{ $question['title'] }}</div>
+                    </a>
+                @endforeach
+            </div>
         </div>
         <div class='paginate'>
             {{ $posts->links() }}
